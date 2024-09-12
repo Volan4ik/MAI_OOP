@@ -1,41 +1,94 @@
 #include <gtest/gtest.h>
-#include <FearOfNumbers.h>
+#include "FearOfNumbers.h"
 
 TEST(FearOfNumbersTest, MondayTest) {
-    EXPECT_TRUE(is_afraid("Понедельник", 12));
-    EXPECT_FALSE(is_afraid("Понедельник", 13));
+    std::string day = "Понедельник";
+    int number1 = 12;
+    int number2 = 13;
+
+    bool result1 = is_afraid(day, number1);
+    bool result2 = is_afraid(day, number2);
+
+    EXPECT_TRUE(result1);
+    EXPECT_FALSE(result2);
 }
 
 TEST(FearOfNumbersTest, TuesdayTest) {
-    EXPECT_TRUE(is_afraid("Вторник", 96));
-    EXPECT_FALSE(is_afraid("Вторник", 50));
+    std::string day = "Вторник";
+    int number1 = 96;
+    int number2 = 50;
+
+    bool result1 = is_afraid(day, number1);
+    bool result2 = is_afraid(day, number2);
+
+    EXPECT_TRUE(result1);
+    EXPECT_FALSE(result2);
 }
 
 TEST(FearOfNumbersTest, WednesdayTest) {
-    EXPECT_TRUE(is_afraid("Среда", 34));
-    EXPECT_FALSE(is_afraid("Среда", 35));
+    std::string day = "Среда";
+    int number1 = 34;
+    int number2 = 35;
+
+    bool result1 = is_afraid(day, number1);
+    bool result2 = is_afraid(day, number2);
+
+    EXPECT_TRUE(result1);
+    EXPECT_FALSE(result2);
 }
 
 TEST(FearOfNumbersTest, ThursdayTest) {
-    EXPECT_TRUE(is_afraid("Четверг", 0));
-    EXPECT_FALSE(is_afraid("Четверг", 1));
+    std::string day = "Четверг";
+    int number1 = 0;
+    int number2 = 1;
+
+    bool result1 = is_afraid(day, number1);
+    bool result2 = is_afraid(day, number2);
+
+    EXPECT_TRUE(result1);
+    EXPECT_FALSE(result2);
 }
 
 TEST(FearOfNumbersTest, FridayTest) {
-    EXPECT_TRUE(is_afraid("Пятница", 2));
-    EXPECT_TRUE(is_afraid("Пятница", 10));
-    EXPECT_FALSE(is_afraid("Пятница", 3));
+    std::string day = "Пятница";
+    int number1 = 2;
+    int number2 = 10;
+    int number3 = 3;
+
+    bool result1 = is_afraid(day, number1);
+    bool result2 = is_afraid(day, number2);
+    bool result3 = is_afraid(day, number3);
+
+    EXPECT_TRUE(result1);
+    EXPECT_TRUE(result2);
+    EXPECT_FALSE(result3);
 }
 
 TEST(FearOfNumbersTest, SaturdayTest) {
-    EXPECT_TRUE(is_afraid("Суббота", 56));
-    EXPECT_FALSE(is_afraid("Суббота", 57));
+    std::string day = "Суббота";
+    int number1 = 56;
+    int number2 = 57;
+
+    bool result1 = is_afraid(day, number1);
+    bool result2 = is_afraid(day, number2);
+
+    EXPECT_TRUE(result1);
+    EXPECT_FALSE(result2);
 }
 
 TEST(FearOfNumbersTest, SundayTest) {
-    EXPECT_TRUE(is_afraid("Воскресенье", 666));
-    EXPECT_TRUE(is_afraid("Воскресенье", -666));
-    EXPECT_FALSE(is_afraid("Воскресенье", 665));
+    std::string day = "Воскресенье";
+    int number1 = 666;
+    int number2 = -666;
+    int number3 = 665;
+
+    bool result1 = is_afraid(day, number1);
+    bool result2 = is_afraid(day, number2);
+    bool result3 = is_afraid(day, number3);
+
+    EXPECT_TRUE(result1);
+    EXPECT_TRUE(result2);
+    EXPECT_FALSE(result3);
 }
 
 int main(int argc, char **argv) {
