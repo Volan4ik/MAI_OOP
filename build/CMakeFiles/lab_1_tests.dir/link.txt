@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/lab_1_tests.dir/tests/test.cpp.o CMakeFiles/lab_1_tests.dir/src/FearOfNumbers.cpp.o -o lab_1_tests  lib/libgtest.a lib/libgtest_main.a lib/libgtest.a
