@@ -24,4 +24,64 @@ TEST(PentagonTests, GeometricCenterCalculation) {
     EXPECT_NEAR(center.second, 0.4, 1e-6);
 }
 
-// Аналогичные тесты для шестиугольника и восьмиугольника
+// Тесты для шестиугольника
+TEST(HexagonTests, AreaCalculation) {
+    Hexagon hexagon;
+    std::istringstream input("0 0 1 0 1 1 0 1 -1 1 -1 0");
+    input >> hexagon;
+
+    double area = hexagon.area();
+    EXPECT_NEAR(area, 2, 1e-6);
+}
+
+TEST(HexagonTests, GeometricCenterCalculation) {
+    Hexagon hexagon;
+    std::istringstream input("0 0 1 0 1 1 0 1 -1 1 -1 0");
+    input >> hexagon;
+
+    auto center = hexagon.geometricCenter();
+    EXPECT_NEAR(center.first, 0.0, 1e-6);
+    EXPECT_NEAR(center.second, 0.5, 1e-6);
+}
+
+TEST(HexagonTests, PrintTest) {
+    Hexagon hexagon;
+    std::istringstream input("0 0 1 0 1 1 0 1 -1 1 -1 0");
+    input >> hexagon;
+
+    std::ostringstream output;
+    hexagon.print(output);
+    
+    EXPECT_EQ(output.str(), "(0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) ");
+}
+
+// Тесты для восьмиугольника
+TEST(OctagonTests, AreaCalculation) {
+    Octagon octagon;
+    std::istringstream input("0 0 1 0 1 1 0 1 -1 1 -1 0 0 -1 1 -1");
+    input >> octagon;
+
+    double area = octagon.area();
+    EXPECT_NEAR(area, 3, 1e-6);
+}
+
+TEST(OctagonTests, GeometricCenterCalculation) {
+    Octagon octagon;
+    std::istringstream input("0 0 1 0 1 1 0 1 -1 1 -1 0 0 -1 1 -1");
+    input >> octagon;
+
+    auto center = octagon.geometricCenter();
+    EXPECT_NEAR(center.first, 0.125, 1e-6);
+    EXPECT_NEAR(center.second, 0.125, 1e-6);
+}
+
+TEST(OctagonTests, PrintTest) {
+    Octagon octagon;
+    std::istringstream input("0 0 1 0 1 1 0 1 -1 1 -1 0 0 -1 1 -1");
+    input >> octagon;
+
+    std::ostringstream output;
+    octagon.print(output);
+    
+    EXPECT_EQ(output.str(), "(0, 0) (1, 0) (1, 1) (0, 1) (-1, 1) (-1, 0) (0, -1) (1, -1) ");
+}
