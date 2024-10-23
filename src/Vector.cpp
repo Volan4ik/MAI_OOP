@@ -28,11 +28,10 @@ void SimpleVector<T>::PopBack() {
 template <typename T>
 void SimpleVector<T>::Erase(size_t index) {
     if (index < size) {
-        // Сдвигаем элементы влево
         for (size_t i = index; i < size - 1; ++i) {
             data[i] = std::move(data[i + 1]);
         }
-        --size;  // Уменьшаем размер
+        --size;  
     }
 }
 
