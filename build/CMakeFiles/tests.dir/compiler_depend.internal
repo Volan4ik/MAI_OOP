@@ -796,6 +796,7 @@ CMakeFiles/tests.dir/src/Hexagon.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Figure.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Hexagon.h
+ /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 
 CMakeFiles/tests.dir/src/Octagon.cpp.o
  /Users/vladimir/Desktop/MAI_OOP/lab_3/src/Octagon.cpp
@@ -1592,6 +1593,7 @@ CMakeFiles/tests.dir/src/Octagon.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Figure.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Octagon.h
+ /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 
 CMakeFiles/tests.dir/src/Pentagon.cpp.o
  /Users/vladimir/Desktop/MAI_OOP/lab_3/src/Pentagon.cpp
@@ -2388,6 +2390,7 @@ CMakeFiles/tests.dir/src/Pentagon.cpp.o
  /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Figure.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Pentagon.h
+ /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 
 CMakeFiles/tests.dir/tests/test.cpp.o
  /Users/vladimir/Desktop/MAI_OOP/lab_3/tests/test.cpp
@@ -3237,4 +3240,5 @@ CMakeFiles/tests.dir/tests/test.cpp.o
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Hexagon.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Octagon.h
  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Pentagon.h
+ /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 

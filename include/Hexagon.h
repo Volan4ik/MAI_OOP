@@ -2,7 +2,7 @@
 #define HEXAGON_H
 
 #include "Figure.h"
-#include <vector>
+#include "Vector.h"
 
 class Hexagon : public Figure {
 private:

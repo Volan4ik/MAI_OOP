@@ -2,7 +2,7 @@
 #define PENTAGON_H
 
 #include "Figure.h"
-#include <vector>
+#include "Vector.h"
 
 class Pentagon : public Figure {
 private:

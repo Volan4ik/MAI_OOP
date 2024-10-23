@@ -794,7 +794,8 @@ CMakeFiles/tests.dir/src/Hexagon.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/sr
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Figure.h \
-  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Hexagon.h
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Hexagon.h \
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 
 CMakeFiles/tests.dir/src/Octagon.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/src/Octagon.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/Availability.h \
@@ -1589,7 +1590,8 @@ CMakeFiles/tests.dir/src/Octagon.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/sr
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Figure.h \
-  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Octagon.h
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Octagon.h \
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 
 CMakeFiles/tests.dir/src/Pentagon.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/src/Pentagon.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/Availability.h \
@@ -2384,7 +2386,8 @@ CMakeFiles/tests.dir/src/Pentagon.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/s
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Figure.h \
-  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Pentagon.h
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Pentagon.h \
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 
 CMakeFiles/tests.dir/tests/test.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/tests/test.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/Availability.h \
@@ -3232,7 +3235,8 @@ CMakeFiles/tests.dir/tests/test.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/tes
   /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Figure.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Hexagon.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Octagon.h \
-  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Pentagon.h
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Pentagon.h \
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h
 
 
 /Users/vladimir/Desktop/MAI_OOP/lab_3/googletest/googletest/include/gtest/internal/gtest-string.h:
@@ -3303,11 +3307,15 @@ CMakeFiles/tests.dir/tests/test.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/tes
 
 /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Pentagon.h:
 
+/Users/vladimir/Desktop/MAI_OOP/lab_3/src/Pentagon.cpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__algorithm/max.h:
 
 /Users/vladimir/Desktop/MAI_OOP/lab_3/include/Octagon.h:
 
 /Users/vladimir/Desktop/MAI_OOP/lab_3/src/Octagon.cpp:
+
+/Users/vladimir/Desktop/MAI_OOP/lab_3/include/Vector.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/limits.h:
 
@@ -3352,8 +3360,6 @@ CMakeFiles/tests.dir/tests/test.cpp.o: /Users/vladimir/Desktop/MAI_OOP/lab_3/tes
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/sys/_types/_ucontext.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/sys/_types/_u_int8_t.h:
-
-/Users/vladimir/Desktop/MAI_OOP/lab_3/src/Pentagon.cpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/sys/_types/_u_int16_t.h:
 

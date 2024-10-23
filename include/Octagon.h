@@ -2,7 +2,7 @@
 #define OCTAGON_H
 
 #include "Figure.h"
-#include <vector>
+#include "Vector.h"
 
 class Octagon : public Figure {
 private:

@@ -844,5 +844,6 @@ CMakeFiles/tests.dir/tests/test.cpp.o: \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/googletest/googletest/include/gtest/gtest_prod.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/tests/../include/Pentagon.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/tests/../include/Figure.h \
+  /Users/vladimir/Desktop/MAI_OOP/lab_3/tests/../include/Vector.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/tests/../include/Hexagon.h \
   /Users/vladimir/Desktop/MAI_OOP/lab_3/tests/../include/Octagon.h
