@@ -1,32 +1,36 @@
-#pragma once
+#ifndef BATTLESIMULATOR_H
+#define BATTLESIMULATOR_H
+
 #include "NPC.h"
 #include <vector>
-#include <memory>
-#include <random>
-#include <iostream>
 #include <thread>
+#include <mutex>
 #include <shared_mutex>
-#include <chrono>
 
 class BattleSimulator {
 public:
-    void addNPC(std::shared_ptr<NPC> npc);
-    void runSimulation();
-    void moveNPC(std::shared_ptr<NPC> npc, double x, double y) {
-        npc->setPosition(x, y);
-    }
+    BattleSimulator(size_t npcCount, int mapWidth, int mapHeight);
+    void run();
 
 private:
-    std::vector<std::shared_ptr<NPC>> npcs;
+    void moveNPCs();
+    void handleBattles();
+    void printMap();
+    bool areClose(const NPC& a, const NPC& b);
+
+    std::vector<NPC> npcs;
+    std::vector<std::thread> threads;
+    std::atomic<bool> running;
+
+    int mapWidth;
+    int mapHeight;
+
     std::shared_mutex npcMutex;
     std::mutex coutMutex;
 
-    void fightNPCs();
-    void printMap();
-    bool simulationRunning = true;
-
-    bool rollDice(int attack, int defense);
-    static constexpr int MAP_WIDTH = 100;
-    static constexpr int MAP_HEIGHT = 100;
-    static constexpr int SIMULATION_TIME = 30; // seconds
+    std::random_device rd;
+    std::mt19937 gen;
+    std::uniform_int_distribution<int> moveDist;
 };
+
+#endif // BATTLESIMULATOR_H

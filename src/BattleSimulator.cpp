@@ -1,97 +1,89 @@
-#include "../include/BattleSimulator.h"
+#include "BattleSimulator.h"
+#include <iostream>
+#include <chrono>
+#include <cmath>
+#include <thread>
 
-void BattleSimulator::addNPC(std::shared_ptr<NPC> npc) {
-    std::unique_lock lock(npcMutex);
-    npcs.push_back(npc);
+BattleSimulator::BattleSimulator(size_t npcCount, int mapWidth, int mapHeight)
+    : running(true), mapWidth(mapWidth), mapHeight(mapHeight), gen(rd()), moveDist(-10, 10) {
+    for (size_t i = 0; i < npcCount; ++i) {
+        int x = rand() % mapWidth;
+        int y = rand() % mapHeight;
+        npcs.emplace_back(i, x, y);
+    }
 }
 
-void BattleSimulator::runSimulation() {
-    auto startTime = std::chrono::steady_clock::now();
+void BattleSimulator::run() {
+    auto start = std::chrono::steady_clock::now();
 
-    std::thread moveThread([this]() { moveNPC(); });
-    std::thread fightThread([this]() { fightNPCs(); });
+    threads.emplace_back([this]() { moveNPCs(); });
+    threads.emplace_back([this]() { handleBattles(); });
 
-    while (std::chrono::steady_clock::now() - startTime < std::chrono::seconds(SIMULATION_TIME)) {
+    while (std::chrono::steady_clock::now() - start < std::chrono::seconds(30)) {
         printMap();
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-    simulationRunning = false; // Остановить потоки
+    running = false;
 
-    moveThread.join();
-    fightThread.join();
+    for (auto& thread : threads) {
+        if (thread.joinable()) thread.join();
+    }
 
-    std::cout << "Simulation finished! Survivors:\n";
+    std::cout << "\nSimulation finished. Survivors:\n";
     for (const auto& npc : npcs) {
-        if (npc->isAlive()) {
-            std::cout << npc->getType() << " " << npc->getName() << " at (" << npc->getX() << ", " << npc->getY() << ")\n";
+        if (npc.isAlive()) {
+            std::cout << "NPC " << npc.getID() << " at (" << npc.getX() << ", " << npc.getY() << ")\n";
         }
     }
 }
 
-void BattleSimulator::moveNPC(std::shared_ptr<NPC> npc, double x, double y) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> moveDist(-10, 10);
-
-    while (simulationRunning) { // Использовать флаг
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+void BattleSimulator::moveNPCs() {
+    while (running) {
         std::unique_lock lock(npcMutex);
-
         for (auto& npc : npcs) {
-            if (npc->isAlive()) {
-                double dx = moveDist(gen);
-                double dy = moveDist(gen);
-                npc->move(dx, dy);
-
-                if (npc->getX() < 0 || npc->getX() > MAP_WIDTH || npc->getY() < 0 || npc->getY() > MAP_HEIGHT) {
-                    npc->move(-dx, -dy);
-                }
+            if (npc.isAlive()) {
+                npc.move(moveDist(gen), moveDist(gen), mapWidth, mapHeight);
             }
         }
-    }
-}
-
-void BattleSimulator::fightNPCs() {
-    while (simulationRunning) { // Использовать флаг
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        std::unique_lock lock(npcMutex);
-
-        for (auto& npc1 : npcs) {
-            if (!npc1->isAlive()) continue;
-
-            for (auto& npc2 : npcs) {
-                if (npc1 == npc2 || !npc2->isAlive()) continue;
-
-                if (npc1->distanceTo(*npc2) <= 10 && npc1->canDefeat(*npc2)) {
-                    if (rollDice(6, 6)) { 
-                        npc2->kill();
-                        std::lock_guard<std::mutex> coutLock(coutMutex);
-                        std::cout << npc1->getType() << " " << npc1->getName() << " killed " 
-                                  << npc2->getType() << " " << npc2->getName() << "!\n";
-                    }
-                }
-            }
-        }
     }
 }
 
+void BattleSimulator::handleBattles() {
+    while (running) {
+        std::unique_lock lock(npcMutex);
+        for (size_t i = 0; i < npcs.size(); ++i) {
+            for (size_t j = i + 1; j < npcs.size(); ++j) {
+                if (!npcs[i].isAlive() || !npcs[j].isAlive()) continue;
+
+                if (areClose(npcs[i], npcs[j])) {
+                    int attack = npcs[i].rollDice();
+                    int defense = npcs[j].rollDice();
+
+                    std::lock_guard<std::mutex> coutLock(coutMutex);
+                    std::cout << "NPC " << npcs[i].getID() << " attacks NPC " << npcs[j].getID()
+                              << " (Attack: " << attack << ", Defense: " << defense << ")\n";
+
+                    if (attack > defense) npcs[j].kill();
+                    else npcs[i].kill();
+                }
+            }
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
 
 void BattleSimulator::printMap() {
     std::lock_guard<std::mutex> coutLock(coutMutex);
-    std::cout << "NPC Positions:\n";
+    std::cout << "\nMap state:\n";
     for (const auto& npc : npcs) {
-        if (npc->isAlive()) {
-            std::cout << npc->getType() << " " << npc->getName() 
-                      << " at (" << npc->getX() << ", " << npc->getY() << ")\n";
+        if (npc.isAlive()) {
+            std::cout << "NPC " << npc.getID() << " at (" << npc.getX() << ", " << npc.getY() << ")\n";
         }
     }
 }
 
-bool BattleSimulator::rollDice(int attack, int defense) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dice(1, 6);
-
-    return dice(gen) > dice(gen);
+bool BattleSimulator::areClose(const NPC& a, const NPC& b) {
+    return std::abs(a.getX() - b.getX()) <= 5 && std::abs(a.getY() - b.getY()) <= 5;
 }

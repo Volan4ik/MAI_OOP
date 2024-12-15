@@ -1,25 +1,43 @@
-#include "../include/NPC.h"
+#include "NPC.h"
 
-NPC::NPC(const std::string& name, double x, double y) : name(name), x(x), y(y) {}
+NPC::NPC(int id, int x, int y) : id(id), x(x), y(y), alive(true) {}
 
-std::string NPC::getName() const { return name; }
-double NPC::getX() const { return x; }
-double NPC::getY() const { return y; }
+void NPC::move(int dx, int dy, int maxWidth, int maxHeight) {
+    std::lock_guard<std::mutex> lock(npcMutex);
+    if (!alive) return;
 
-double NPC::distanceTo(const NPC& other) const {
-    return std::sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y));
+    x = std::max(0, std::min(maxWidth - 1, x + dx));
+    y = std::max(0, std::min(maxHeight - 1, y + dy));
 }
 
-void NPC::setPosition(double x, double y) {
-    this->x = x;
-    this->y = y;
+bool NPC::isAlive() const {
+    std::lock_guard<std::mutex> lock(npcMutex);
+    return alive;
 }
 
-std::pair<double, double> NPC::getPosition() const {
-    return {x, y};
+void NPC::kill() {
+    std::lock_guard<std::mutex> lock(npcMutex);
+    alive = false;
 }
 
-void NPC::move(double dx, double dy) {
-    x += dx;
-    y += dy;
+int NPC::rollDice() const {
+    std::lock_guard<std::mutex> lock(npcMutex);
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dist(1, 6);
+    return dist(gen);
+}
+
+int NPC::getX() const {
+    std::lock_guard<std::mutex> lock(npcMutex);
+    return x;
+}
+
+int NPC::getY() const {
+    std::lock_guard<std::mutex> lock(npcMutex);
+    return y;
+}
+
+int NPC::getID() const {
+    return id;
 }

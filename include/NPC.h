@@ -1,30 +1,26 @@
-#pragma once
-#include <string>
-#include <cmath>
+#ifndef NPC_H
+#define NPC_H
+
+#include <random>
+#include <mutex>
 
 class NPC {
 public:
-    virtual ~NPC() = default;
-    NPC(const std::string& name, double x, double y); 
-    void setPosition(double x, double y);
-    std::pair<double, double> getPosition() const;
+    NPC(int id, int x, int y);
 
-    std::string getName() const;
-    double getX() const;
-    double getY() const;
-    double distanceTo(const NPC& other) const;
+    void move(int dx, int dy, int maxWidth, int maxHeight);
+    bool isAlive() const;
+    void kill();
+    int rollDice() const;
+    int getX() const;
+    int getY() const;
+    int getID() const;
 
-    virtual bool canDefeat(const NPC& other) const = 0;
-    virtual std::string getType() const = 0;
-
-    bool isAlive() const { return alive; }
-    void kill() { alive = false; }
-
-    void move(double dx, double dy);
-
-protected:
-    std::string name;
-    double x;
-    double y;
-    bool alive = true;
+private:
+    int id;
+    int x, y;
+    bool alive;
+    mutable std::mutex npcMutex;
 };
+
+#endif // NPC_H
