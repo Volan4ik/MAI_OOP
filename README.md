@@ -1,3 +1,3 @@
 # MAI_OOP
-Laboratory works on the OOP course at MAI
+OOP Laboratory works on C++ at MAI
 
